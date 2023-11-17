@@ -6,7 +6,6 @@ jobs:
     # Install go modules and run tests
     docker:
       - image: cimg/go:1.21.1
-    resource_class: large
     steps:
       - checkout
       - run:
