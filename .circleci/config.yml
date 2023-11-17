@@ -8,6 +8,7 @@ jobs:
       - image: cimg/go:1.21.1
     steps:
       - checkout
+      resource_class: xlarge
       - run:
           name: Run tests
           command: gotestsum --junitfile junit.xml
