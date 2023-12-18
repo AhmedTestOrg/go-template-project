@@ -4,6 +4,7 @@ version: 2.1
 jobs:
   test-go:
     # Install go modules and run tests
+    resource_class: large
     docker:
       - image: cimg/go:1.21.1
     steps:
