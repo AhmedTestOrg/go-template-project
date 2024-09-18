@@ -3,14 +3,9 @@
 version: 2.1
 
 parameters:
-  message:
-    type: string
-    default: "hello world"
-
-commands:
-  print:
-    steps:
-      - run: echo << parameters.message >>
+  run_integration_tests:
+    type: boolean
+    default: false
 
 jobs:
   test-go:
@@ -24,8 +19,14 @@ jobs:
           command: gotestsum --junitfile junit.xml
       - store_test_results:
           path: junit.xml
-      - print:
-          message: Printing << parameters.message >>
+  integration-test:
+      docker:
+        - image: cimg/go:1.21.1
+      steps:
+        - checkout
+        - run:
+          name: Run tests
+          command: echo "running integration tests ..."
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
@@ -38,8 +39,11 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - test-go:
-          message: echo << parameters.message >>
+      - test-go
+  integration_tests:
+    when:  << pipeline.parameters.run_integration_tests >>
+    jobs:
+      - integration-test
     # - deploy:
     #     requires:
     #       - test-go
