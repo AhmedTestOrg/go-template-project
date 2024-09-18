@@ -1,6 +1,15 @@
 # This config was automatically generated from your source code
 # Stacks detected: deps:go:.
 version: 2.1
+
+commands:
+  print:
+    parameters:
+      message:
+        type: string
+    steps:
+      - run: echo << parameters.message >>
+
 jobs:
   test-go:
     # Install go modules and run tests
@@ -13,6 +22,8 @@ jobs:
           command: gotestsum --junitfile junit.xml
       - store_test_results:
           path: junit.xml
+      - print:
+          message: Printing << parameters.message >>
   deploy:
     # This is an example deploy job, not actually used by the workflow
     docker:
