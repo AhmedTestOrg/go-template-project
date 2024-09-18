@@ -2,12 +2,13 @@
 # Stacks detected: deps:go:.
 version: 2.1
 
+parameters:
+  message:
+    type: string
+    default: "hello world"
+
 commands:
   print:
-    parameters:
-      message:
-        type: string
-        default: hello world
     steps:
       - run: echo << parameters.message >>
 
