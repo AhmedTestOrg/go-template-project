@@ -36,7 +36,8 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - test-go
+      - test-go:
+        message: echo << parameters.message >>
     # - deploy:
     #     requires:
     #       - test-go
