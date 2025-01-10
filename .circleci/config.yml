@@ -1,0 +1,28 @@
+# This config was automatically generated from your source code
+# Stacks detected: deps:go:.
+version: 2.1
+
+parameters:
+  greeting:
+    type: string
+    default: "Bob"
+
+jobs:
+  test-go:
+    # Install go modules and run tests
+    docker:
+      - image: cimg/go:1.21.1
+    steps:
+      - checkout
+      - run:
+          name: Say Hello
+          command: echo Hello << pipeline.parameters.greeting >>
+      - run: sleep 15s
+workflows:
+  build-and-test:
+    jobs:
+      - test-go
+      
+    # - deploy:
+    #     requires:
+    #       - test-go
