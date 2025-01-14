@@ -2,6 +2,5 @@ package pkg_test
 
 import "testing"
 
-func TestMethod(t *testing.T) {
-  
+func TestMethod(t *testing.T) { 
 }
