@@ -21,7 +21,13 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - test-go     
+      - test-go
+  tagged-build:
+    jobs:
+      - test-go:
+          filters:
+            tags:
+              only: *
     # - deploy:
     #     requires:
     #       - test-go
