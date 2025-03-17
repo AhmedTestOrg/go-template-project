@@ -21,11 +21,10 @@ jobs:
 workflows:
   build-and-test:
     jobs:
-      - test-go     
+      - test-go:
+          filters:  # required since `deploy` has tag filters AND requires `build`
+            tags:
+              only: /.*/
     # - deploy:
     #     requires:
     #       - test-go
-
-
-
-
