@@ -3,9 +3,9 @@
 version: 2.1
 
 parameters:
-  greeting:
-    type: string
-    default: "Bob"
+  canary:
+    type: boolean
+    default: false
 
 jobs:
   test-go:
@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run:
           name: Say Hello
-          command: echo Hello << pipeline.parameters.greeting >>
+          command: echo canary = << pipeline.parameters.canary >>
       - run: sleep 15s
 workflows:
   build-and-test:
