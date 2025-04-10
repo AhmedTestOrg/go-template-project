@@ -15,8 +15,14 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Say Hello
-          command: echo canary = << pipeline.parameters.canary >>
+        environment:
+          CANARY: << pipeline.parameters.canary >>
+        command: |
+          set -o errexit
+          set -o nounset
+          set -o pipefail
+          set -o xtrace
+          echo "export CANARY=${CANARY}"
       - run: sleep 15s
 workflows:
   build-and-test:
