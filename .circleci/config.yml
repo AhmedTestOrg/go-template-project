@@ -21,6 +21,7 @@ jobs:
             set -o pipefail
             set -o xtrace
             echo "export CANARY=${CANARY}"
+            echo << pipeline.parameters.canary >>
       - run: sleep 15s
 
 workflows:
